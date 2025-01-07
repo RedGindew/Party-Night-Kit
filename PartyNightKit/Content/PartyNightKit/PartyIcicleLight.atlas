@@ -1,0 +1,12 @@
+PartyNightKit.PartyIcicleLightRight
+loc 0 0 16 48
+piv 15 47
+PartyNightKit.PartyIcicleLightLeft
+loc 0 0 16 48
+piv 0 40
+PartyNightKit.PartyIcicleLightDown
+loc 0 48 16 48
+piv 0 95
+PartyNightKit.PartyIcicleLightUp
+loc 0 48 16 48
+piv 15 88

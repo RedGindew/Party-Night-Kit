@@ -1,0 +1,18 @@
+{
+    "BuildMode": {
+        "PartyNightKit.PartyRecordPlayer": "Vintage Record Player",
+        "PartyNightKit.PartyRecordPlayerColors0": "Wooden Stand",
+        "PartyNightKit.PartyRecordPlayerColors1": "Record Player",
+
+        "PartyNightKit.PartyBalloons": "Party All Night Balloons",
+        "PartyNightKit.PartyBalloonsColors0": "Ballon 0",
+        "PartyNightKit.PartyBalloonsColors1": "Ballon 1",
+        "PartyNightKit.PartyBalloonsColors2": "Ballon 2",
+
+        "PartyNightKit.PartyWallBanner": "Wall Banners of Celebration",
+        "PartyNightKit.PartyWallBannerColors1": "Banner",
+
+        "PartyNightKit.PartyIcicleLight": "Party Icicle Lights",
+        "PartyNightKit.PartyIcicleLightColors1": "Icicle"
+    }
+}

@@ -1,0 +1,12 @@
+PartyNightKit.PartyRecordPlayerDown
+loc 0 0 22 33
+piv 11 27
+PartyNightKit.PartyRecordPlayerRight
+loc 0 33 22 33
+piv 11 60
+PartyNightKit.PartyRecordPlayerLeft
+loc 0 66 22 33
+piv 11 93
+PartyNightKit.PartyRecordPlayerUp
+loc 0 99 22 33
+piv 11 126
