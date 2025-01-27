@@ -13,6 +13,11 @@
         "PartyNightKit.PartyWallBannerColors1": "Banner",
 
         "PartyNightKit.PartyIcicleLight": "Party Icicle Lights",
+        "PartyNightKit.DiscoBall": "Disco Ball",
         "PartyNightKit.PartyIcicleLightColors1": "Icicle"
+    },
+    
+    "Clothes": {
+        "PartyNightKit.OpenShirt": "The Toxic Open Shirt"
     }
 }
