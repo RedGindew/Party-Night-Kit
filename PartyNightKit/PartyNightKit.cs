@@ -33,7 +33,7 @@ public class PartyNightKit : Mod
     public override string Name => "Party Night Kit";
     public override string Description => "Party all night! - By Gindew";
     public override string IssueTrackerUrl => "https://x.com/RedGindew";
-    public override string TestedVersionRange => "[0.46.0]";
+    public override string TestedVersionRange => "[0.46.0,0.46.1]";
     private Dictionary<Point, TextureRegion> uiTextures;
     private Dictionary<Point, TextureRegion> openShirt;
     public override TextureRegion Icon => this.uiTextures[new Point(0, 0)];
