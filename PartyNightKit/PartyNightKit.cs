@@ -33,21 +33,32 @@ public class PartyNightKit : Mod
     public override string Name => "Party Night Kit";
     public override string Description => "Party all night! - By Gindew";
     public override string IssueTrackerUrl => "https://x.com/RedGindew";
-    public override string TestedVersionRange => "[0.46.0,0.46.1]";
-    private Dictionary<Point, TextureRegion> uiTextures;
+    public override string TestedVersionRange => "[0.47.0]";
+    private Dictionary<Point, TextureRegion> uiTextures, Floor;
     private Dictionary<Point, TextureRegion> openShirt;
     public override TextureRegion Icon => this.uiTextures[new Point(0, 0)];
-
 
     public override void Initialize(Logger logger, RawContentManager content, RuntimeTexturePacker texturePacker, ModInfo info)
     {
         PartyNightKit.Logger = logger;
         texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("UITex"), 8, 8), r => this.uiTextures = r, 1, true);
+        texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("Tiles"), 6, 4), r => this.Floor = r, 1, true, true);
         texturePacker.Add(new UniformTextureAtlas(content.Load<Texture2D>("OpenShirt"), 4, 7), r => this.openShirt = r, 1, true, true);
     }
 
     public override void AddGameContent(GameImpl game, ModInfo info)
     {
+        var arcadeCategory = ObjectCategory.AddFlag<ObjectCategory>("ArcadeMachine");
+        ActionType.Register(new ActionType.TypeSettings("PartyNightKit.ArcadeMachineAction", arcadeCategory, typeof(ArcadeMachineAction))
+        {
+            Ai =
+            {
+                CanDoRandomly = true,
+                PassivePriority = _=> 30,
+                SolvedNeeds = [NeedType.Entertainment]
+            },
+            CanExecute = ActionType.IsNotEmotional(EmotionType.Sad)
+        });
         FurnitureType.Register(new FurnitureType.TypeSettings("PartyNightKit.PartyBalloons", new Point(1, 1), ObjectCategory.Nothing, 250, new ColorScheme[] { ColorScheme.Modern, ColorScheme.Modern, ColorScheme.Modern, ColorScheme.White })
         {
             Icon = this.Icon,
@@ -59,7 +70,7 @@ public class PartyNightKit : Mod
         {
             Icon = this.Icon,
             Tab = (FurnitureTool.Tab.LivingRoom),
-            Colors = new ColorSettings(ColorScheme.SimpleWood, ColorScheme.Grays, ColorScheme.White){Defaults = new int[] { 0, 6, 0 }, PreviewName = "PartyNightKit.PartyRecordPlayer"},
+            Colors = new ColorSettings(ColorScheme.SimpleWood, ColorScheme.Grays, ColorScheme.White){Defaults = new int[] { 1, 6, 0 }, PreviewName = "PartyNightKit.PartyRecordPlayer"},
             DefaultRotation = MLEM.Maths.Direction2.Up
         });
         FurnitureType.Register(new FurnitureType.TypeSettings("PartyNightKit.PartyIcicleLight", new Point(1, 1), ObjectCategory.WallHanging | ObjectCategory.NonColliding, 120, new ColorScheme[] { ColorScheme.White, ColorScheme.Modern })
@@ -73,9 +84,26 @@ public class PartyNightKit : Mod
         {
             Icon = this.Icon,
             Tab = (FurnitureTool.Tab.Decoration),
-            Colors = new ColorSettings(ColorScheme.White, ColorScheme.Modern){Defaults = new int[] { 0, 11 }, PreviewName = "PartyNightKit.PartyWallBanner"},
+            Colors = new ColorSettings(ColorScheme.White, ColorScheme.Modern){Defaults = new int[] { 0, 13 }, PreviewName = "PartyNightKit.PartyWallBanner"},
             DefaultRotation = MLEM.Maths.Direction2.Right
         });
+        FurnitureType.Register(new FurnitureType.TypeSettings("PartyNightKit.NeonSign", new Point(1, 1), ObjectCategory.WallHanging | ObjectCategory.NonColliding, 120, new ColorScheme[] { ColorScheme.Modern })
+        {
+            Icon = this.Icon,
+            Tab = (FurnitureTool.Tab.Lighting),
+            Colors = new ColorSettings(ColorScheme.Modern){Defaults = new int[] { 11 }, PreviewName = "PartyNightKit.NeonSign"},
+            DefaultRotation = MLEM.Maths.Direction2.Right
+        });
+        FurnitureType.Register(new FurnitureType.TypeSettings("PartyNightKit.ArcadeMachine", new Point(1, 1), arcadeCategory, 250)
+        {
+            Icon = this.Icon,
+            Tab = (FurnitureTool.Tab.LivingRoom),
+            Colors = new ColorSettings(ColorScheme.SheetMetal, ColorScheme.Modern, ColorScheme.Modern, ColorScheme.Modern){Defaults = new int[] { 0, 12, 8, 8 }, PreviewName = "PartyNightKit.ArcadeMachine"},
+            DefaultRotation = MLEM.Maths.Direction2.Right,
+            ConstructedType = typeof(ScreenObject)
+        });
+
+        ScreenObject.ScreenContentOverrides.Add((furniture => furniture.Type.HasCategory(arcadeCategory), (furniture, content) => "PartyNightKit.ArcadeMachine" + content));
         
         FurnitureType.Register(new FurnitureType.TypeSettings("PartyNightKit.DiscoBall", new Point(1, 1), ObjectCategory.Lamp | ObjectCategory.SmallObject | ObjectCategory.NonColliding, 50, new ColorScheme[] { ColorScheme.White })
         {
@@ -91,9 +119,9 @@ public class PartyNightKit : Mod
                 ]
             }
         });
+        Tile.Register("PartyNightKit.FunkyCarpet", 20, this.Floor, new Point(0, 0), new ColorScheme[] { ColorScheme.Modern, ColorScheme.Modern }, 0, true, Tile.Category.None, this.Icon);
 
         Clothes.Register(new Clothes("PartyNightKit.OpenShirt", ClothesLayer.Shirt, this.openShirt, new Point(0, 0), 100, ClothesIntention.Everyday, StylePreference.Neutral, ColorScheme.WarmDarkMutedPastels) { Icon = this.Icon });
-
     }
 
     public override IEnumerable<string> GetCustomFurnitureTextures(ModInfo info)
@@ -103,5 +131,7 @@ public class PartyNightKit : Mod
         yield return "PartyIcicleLight";
         yield return "PartyWallBanner";
         yield return "DiscoBall";
+        yield return "NeonSign";
+        yield return "ArcadeMachine";
     }
 }

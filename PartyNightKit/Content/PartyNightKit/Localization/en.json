@@ -14,10 +14,24 @@
 
         "PartyNightKit.PartyIcicleLight": "Party Icicle Lights",
         "PartyNightKit.DiscoBall": "Disco Ball",
-        "PartyNightKit.PartyIcicleLightColors1": "Icicle"
+        "PartyNightKit.PartyIcicleLightColors1": "Icicle",
+
+        "PartyNightKit.NeonSign": "Neon Sign",
+        "PartyNightKit.NeonSignColors0": "Sign Color",
+        
+        "PartyNightKit.FunkyCarpet": "Groooovy Carpet",
+        "PartyNightKit.ArcadeMachine": "Retro Arcade Machine",
+        "PartyNightKit.ArcadeMachineColors0": "Metal Panel",
+        "PartyNightKit.ArcadeMachineColors1": "Body Colour",
+        "PartyNightKit.ArcadeMachineColors2": "Accent Colour",
+        "PartyNightKit.ArcadeMachineColors3": "Sign Colour"
     },
     
     "Clothes": {
         "PartyNightKit.OpenShirt": "The Toxic Open Shirt"
+    },
+
+    "Actions": {
+        "PartyNightKit.ArcadeMachineAction": "Play Arcade Machine"
     }
 }
